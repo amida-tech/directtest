@@ -2,7 +2,7 @@
   "name": "directtest",
   "version": "0.1.0",
   "description": "directtest",
-  "main": "hello-world-server.njs",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified! Configure in package.json\" && exit 1"
   },
