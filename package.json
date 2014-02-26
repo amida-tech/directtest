@@ -6,6 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified! Configure in package.json\" && exit 1"
   },
+  "dependencies": {
+	"simplesmtp": "~0.3.21",
+	"mailcomposer": "~0.2.8",
+	"poplib": "~0.1.5",
+	"mailparser": "~0.4.1"
+  },
   "repository": "",
   "keywords": [
     "node.js",
