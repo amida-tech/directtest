@@ -27,7 +27,9 @@ var mail = {
 
 var attachment = inputJSON.attachment;
 
-mh.send(server, mail, attachment);
+//mh.send(server, mail, attachment);
+
+mh.receive(server);
 
 mh.emitter.on('error', function(err) {
 	console.log("Error");
