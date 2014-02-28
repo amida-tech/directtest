@@ -1,45 +1,47 @@
-var input = "";
+var mh = require("./lib/mailbbtestcase");
 
-process.argv.forEach(function (val, index, array) {
-	if (index > 2) {
-		input = input + " " + val;
-	}
-});
-var inputJSON = JSON.parse(input);
-
-var mh = require("./lib/mailhandler");
-
-var server = {
-		port: inputJSON.port,
-		ip : inputJSON.ip,
-		auth : {
-			user: inputJSON.user,
-			pass: inputJSON.pass
+var sendingServer = {
+		ip : "expl-provider.amida-demo.com",
+		inPort: 465,
+		inAuth : {
+			user: "provider",
+			pass: "provider"
+		},
+		outPort: 995,
+		outAuth: {
+			user: "catchall",
+			pass: "password"
 		}
 };
 
-var mail = {
-		from : inputJSON.from,
-		to : inputJSON.to,
-		subject: inputJSON.subject,
-		body: inputJSON.body
+var receivingServer = {
+		ip : "expl-patient.amida-demo.com",
+		outPort: 995,
+		outAuth: {
+			user: "catchall",
+			pass: "password"
+		}
 };
 
-var attachment = inputJSON.attachment;
+var email = {
+		actual: {
+			from : "provider@expl-provider.amida-demo.com",
+			to : "patient@axpl-patient.amida-demo.com",
+			subject: "Test Message " + Date.now(),
+			body: "Here goes the message body"
+		},
+		attachment: "/Work/nodespace/directtest/resource/sample.txt"
+};
 
-mh.send(server, mail, attachment);
 
-//mh.receive(server);
-
-mh.emitter.on('error', function(err) {
-	console.log("Error");
-	console.log(err);
+mh.execute(sendingServer, receivingServer, email);
+		
+mh.emitter.on('error', function(result) {
+	console.error(">>>>> Error");
+	console.error(result);
 });
 
-mh.emitter.on('end', function() {
-	console.log('Succesful');
-});
-
-mh.emitter.on('received', function(mail) {
-	console.log(mail);
+mh.emitter.on('end', function(result) {
+	console.log('>>>>> Success');
+	console.log(result);
 });
