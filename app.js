@@ -34,8 +34,10 @@ var email = {
 };
 
 
-mh.execute(sendingServer, receivingServer, email);
-		
+//mh.execute(sendingServer, receivingServer, email);
+
+mh.deleteAllEmails(sendingServer);
+
 mh.emitter.on('error', function(result) {
 	console.error(">>>>> Error");
 	console.error(result);
