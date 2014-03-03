@@ -26,7 +26,7 @@ var receivingServer = {
 var email = {
 		actual: {
 			from : "provider@expl-provider.amida-demo.com",
-			to : "patient@axpl-patient.amida-demo.com",
+			to : "patient@expl-patient.amida-demo.com",
 			subject: "Test Message " + Date.now(),
 			body: "Here goes the message body"
 		},
@@ -34,9 +34,9 @@ var email = {
 };
 
 
-//mh.execute(sendingServer, receivingServer, email);
+mh.execute(sendingServer, receivingServer, email);
 
-mh.deleteAllEmails(sendingServer);
+//mh.deleteAllEmails(sendingServer);
 
 mh.emitter.on('error', function(result) {
 	console.error(">>>>> Error");
