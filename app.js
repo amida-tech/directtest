@@ -1,4 +1,5 @@
 var mh = require("./lib/mailbbtestcase");
+var certificatemgr = require('./lib/certificatemgr');
 
 var sendingServer = {
 		ip : "expl-provider.amida-demo.com",
@@ -43,11 +44,6 @@ var email2 = {
 		attachment: "/Work/nodespace/directtest/resource/sample.txt"
 };
 
-//mh.execute(sendingServer, receivingServer, email);
-mh.execute(sendingServer, sendingServer, email2);
-
-//mh.showAllEmails(receivingServer);
-
 mh.emitter.on('error', function(result) {
 	console.error(">>>>> Error");
 	console.error(result);
@@ -57,3 +53,12 @@ mh.emitter.on('end', function(result) {
 	console.log('>>>>> Success');
 	console.log(result);
 });
+
+//mh.execute(sendingServer, receivingServer, email);
+//mh.execute(sendingServer, sendingServer, email2);
+
+//mh.showAllEmails(receivingServer);
+
+
+//getCertificate('localhost', 3000);
+certificatemgr.putCertificate('/Work/sandbox/clientout/patient.der', 'localhost', 3000);
