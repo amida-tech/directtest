@@ -61,4 +61,13 @@ mh.emitter.on('end', function(result) {
 
 
 //getCertificate('localhost', 3000);
-certificatemgr.putCertificate('/Work/sandbox/clientout/patient.der', 'localhost', 3000);
+//certificatemgr.putCertificate('/Work/sandbox/clientout/patient.der', 'localhost', 3000);
+//certificatemgr.reset('expl-provider.amida-demo.com', 3000);
+
+var info = {
+	domain: "expl-provider.amida-demo.com",
+	country: "US",
+	city: "Rockville",
+	organization: "Amida Provider Services"
+};
+certificatemgr.createPKCS10('localhost', 3000, info);
