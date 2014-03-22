@@ -1,6 +1,16 @@
 var mh = require("./lib/mailbbtestcase");
 var certificatemgr = require('./lib/certificatemgr');
 var request = require('request');
+var fileutil = require('./lib/fileutil');
+
+var postJSON = function (hostname, port, route, info) {
+	var address = "http://" + hostname + ":" + port + route;
+	var options = {
+		uri: address,
+		json: info
+	};
+	request.post(options);
+};
 
 var sendingServer = {
 		ip : "expl-provider.amida-demo.com",
@@ -85,12 +95,41 @@ var info = {
 //certificatemgr.postTrustBundle('expl-provider.amida-demo.com', 3000, info);
 //certificatemgr.postAnchor('expl-provider.amida-demo.com', 3000, info);
 //certificatemgr.postCertificate('expl-provider.amida-demo.com', 3000, info);
-request.del("http://expl-provider.amida-demo.com:3000/reset");
+//request.del("http://expl-provider.amida-demo.com:3000/reset");
 
-var address = "http://54.201.106.201:3000/bundle";
+//var address = "http://54.201.106.201:3000/bundle";
 //var address = "https://secure.bluebuttontrust.org/p7b.ashx?id=cb300117-3a4a-e211-8bc3-78e3b5114607";
 //request.get(address, function(error, response, body) {
 //	console.log(error);
 //	console.log(response);
 //});
 
+
+//fileutil.sendFiles('localhost', 3000, ['/Work/sandbox/anchors/patient.der', '/Work/sandbox/anchors/provider.der'], function(err) {
+//	console.log(">>>>>" + err);
+//});
+
+//request.post("http://localhost:3000/servebundle");
+var info2 = {
+	domain: "localhost",
+	country: "US",
+	city: "Rockville",
+	organization: "Amida Provider Services",
+	x509: "certificate",
+	pkcs12: "privcert",
+	request: "req.pem",
+	trustUrl: "https://secure.bluebuttontrust.org/p7b.ashx?id=cb300117-3a4a-e211-8bc3-78e3b5114607",
+	trustName: "test",
+	owner: "expl-provider.amida-demo.com",
+	filename: "patient.der",
+	sign: true
+};
+
+postJSON("localhost", 3000, "/genBundle", info2);
+
+//postJSON("localhost", 3000, "/pkcs12", info2);
+//postJSON("localhost", 3000, "/x509", info2);
+//postJSON("localhost", 3000, "/startunsigned", info2);
+//postJSON("localhost", 443, "/", info2);
+//fileutil.getURLFile("https://localhost:3443", "/Work/sandbox/result/bundle.p7b", function(error) {
+//	console.log(error);
