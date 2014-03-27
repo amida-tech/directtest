@@ -35,8 +35,8 @@ patX509Info.organization = "Amida Patient Services";
 
 var email = {
     actual: {
-    from : "provider@expl-provider.amida-demo.com",
-    to : "patient@expl-patient.amida-demo.com",
+    from : "user@expl-provider.amida-demo.com",
+    to : "user@expl-patient.amida-demo.com",
     subject: "Test Message " + Date.now(),
     body: "Here goes the message body"
 },
