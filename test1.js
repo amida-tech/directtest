@@ -48,9 +48,11 @@ nimble.series([
     function(callback) {patientServer.initSelfSigned(callback, patX509Info);},
     function(callback) {providerServer.transferFile(callback, patientServer, provX509Info.filename + ".der", "/Work/sandbox/files");},
     function(callback) {patientServer.transferFile(callback, providerServer, patX509Info.filename + ".der", "/Work/sandbox/files");},
+    function(callback) {util.sleep(callback, 5000);},
+    function(callback) {mh.run(callback, providerServer, patientServer, email, 'rejected');},
     function(callback) {providerServer.loadAnchor(callback, patX509Info.filename + ".der", providerServer.ip);},
     function(callback) {patientServer.loadAnchor(callback, provX509Info.filename + ".der", patientServer.ip);},
-    function(callback) {util.sleep(callback, 5000);},
+    function(callback) {util.sleep(callback, 10000);},
     function(callback) {mh.run(callback, providerServer, patientServer, email, 'complete');}
 ], function(err) {
     if (err) {
